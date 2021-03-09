@@ -1,6 +1,5 @@
 import discord
 import os 
-import markov
 import sys
 
 client = discord.Client()
@@ -14,11 +13,12 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('ham me'):
-        filename = sys.argv[1:]
-        raw_text = markov.open_and_read_file(filename)
-        markov_chains = markov.make_chains(raw_text)
-        markov_text = markov.make_text(markov_chains)
-        await message.channel.send(markov_text)
+    if message.content.find('time') != -1:
+
+        await message.channel.send('Is it time already...')
+
+    if message.content.find('want') != -1:
+
+        await message.channel.send("I can't have what I want :(")
 
 client.run(os.environ['DISCORD_TOKEN'])
